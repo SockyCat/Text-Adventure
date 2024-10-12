@@ -29,8 +29,13 @@ try:
         input("Press enter to continue...")
     elif argv == "reset-data":
         db["first_time"] = True
-        db["stage"] == 1
+        db["stage"] = 1
+        with open('save.json', 'w') as f:
+            json.dump(db, f)
         print("[NOTE] Your data has been reset.")
+        exit()
+    elif argv == "debug":
+        print("Yep, all good. You would get errors if this didn't come up")
         exit()
     else:
         print("[ERROR]: Why did you try?")
