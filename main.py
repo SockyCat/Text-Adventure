@@ -9,12 +9,9 @@ db = json.load(open("save.json"))
 cheatcode = False
 
 # This is sort of a joke
-
-
 class Alarm(Exception):
     pass
-
-
+    
 try:
     argv = sys.argv[1]
     # print(argv)
