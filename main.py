@@ -1,9 +1,3 @@
-'''
-
-BEFORE YOU START, PLEASE READ THE README FILE.
-
-'''
-
 # Import required modules
 import random
 from getkey import getkey, keys
@@ -12,9 +6,11 @@ import sys
 import json
 
 db = json.load(open("save.json"))
-
+cheatcode = False
 
 # This is sort of a joke
+
+
 class Alarm(Exception):
     pass
 
@@ -32,7 +28,7 @@ try:
         db["stage"] = 1
         with open('save.json', 'w') as f:
             json.dump(db, f)
-        print("[NOTE] Your data has been reset.")
+        print("[NOTE]: Your data has been reset.")
         exit()
     elif argv == "debug":
         print("Yep, all good. You would get errors if this didn't come up")
@@ -50,7 +46,7 @@ try:
         pass
     else:
         db["first_time"] = True
-except:
+except Exception:
     db["first_time"] = True
 
 if db['first_time']:
@@ -155,7 +151,7 @@ def sequence1():
     print("Good. Let's begin.")
     print("""
 You are at a payphone, and you have a piece of paper reading:
-Some of us contain 10 numbers, one of them don't. 
+Some of us contain 10 numbers, one of them don't.
 The three-digit ones, will not help you at all.
 Any number starting or ending with 13 does not help you.
 The number is 12094444--
@@ -288,7 +284,8 @@ while True:
                 )
                 with open('save.json', 'w') as f:
                     json.dump(db, f)
-            
+                exit()
+
         else:
             raise Alarm('What the heck happened here?')
     except KeyError:

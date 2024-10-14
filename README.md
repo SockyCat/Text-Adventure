@@ -1,4 +1,4 @@
-# This only views code. To run, go to https://codesandbox.io/p/devbox/text-adventure-k7cvsv
+# This only views code. To run, go to https://codesandbox.io/p/github/SockyCat/Text-Adventure/main
 
 ```
 Simple text adventure made in Python as apart as a school assignment.
