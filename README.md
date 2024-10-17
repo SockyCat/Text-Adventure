@@ -1,5 +1,5 @@
 # This only views code. To run, go to https://codesandbox.io/p/github/SockyCat/Text-Adventure/main
-
+## It has been noticed that the CodeSandbox link does not load under the school network. Please use a hotspot to connect.
 ```
 Simple text adventure made in Python as apart as a school assignment.
 
