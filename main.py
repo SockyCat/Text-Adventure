@@ -122,7 +122,7 @@ def climb():
         return True
     elif not climber.alive:
         print("Game Over. You died from falling.")
-        return "False"
+        return False
     else:
         print("You stopped halfway and fell, dying in the process.")
         return False
