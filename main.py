@@ -243,7 +243,7 @@ def sequence3():
         print("You. Are. Dead.")
         with open('save.json', 'w') as f:
             json.dump(db, f)
-
+        exit()
     else:
         print(
             "That's not an option, but the computer recognises that and bans you for cheating. What an idiot you are :/"
