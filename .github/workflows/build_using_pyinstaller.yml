@@ -18,12 +18,14 @@ jobs:
       with:
         name: text-adventure
         path: dist/windows
+    - name: Zip folder
+      run: zip main/
     - name: Release
       uses: xresloader/upload-to-github-release@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        file: "dist\\windows"
+        file: "dist\\windows\\main.zip"
         tags: false
         draft: false
 
