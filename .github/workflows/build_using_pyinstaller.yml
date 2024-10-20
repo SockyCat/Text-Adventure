@@ -26,7 +26,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        file: "dist\\windows\\text-adventure-win.zip"
+        file: "dist\\windows\\main\\text-adventure-win.zip"
         tags: false
         draft: false
 
