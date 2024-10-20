@@ -23,8 +23,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        file: "dist/windows"
-        tags: true
+        file: "dist\\windows"
+        tags: false
         draft: false
 
           
