@@ -14,9 +14,25 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Package Application
-      uses: JackMcKew/pyinstaller-action-windows@main
+      uses: eric2788/pyinstaller-build@0.1.3
       with:
-        path: .
+        # the main python file (without .py)
+        main: main
+        # the dist path
+        dist: # optional, default is ./dist
+        # the version of python
+        python_version: # optional, default is 3.9.7
+        # the version of pyinstaller
+        pyinstaller_version: # optional, default is 4.7
+        # the output exe name
+        artifact: # optional, default is main
+        # whether to install requirements.txt before build
+        use-dependencies: # optional, default is true
+        # whether to disppear console terminal
+        no-console: # optional
+        # add the icon mark into your executable, the file path of your ico
+        icon: # optional, default is NONE
+          .
     - uses: actions/upload-artifact@v3
       with:
         name: main
