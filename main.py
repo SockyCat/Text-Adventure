@@ -126,8 +126,9 @@ print("WELCOME!")
 start = input("Do. \nYou. \nWish. \nTo. \nPlay. \nMy. \nGame? \n").upper()
 
 if start == "YES":
-    break
+    pass
 else:
+    print("You really don't want to play it, don't you?")
     with open('save.json', 'w') as f:
         json.dump(db, f)
     exit()
