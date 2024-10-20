@@ -1,9 +1,9 @@
 # Import required modules
 import random
-from getkey import getkey, keys
 import os
 import sys
 import json
+from getkey import getkey, keys
 
 db = json.load(open("save.json"))
 cheatcode = False
@@ -32,7 +32,7 @@ try:
         exit()
     else:
         print("[ERROR]: Why did you try?")
-        raise Alarm("⚠️CHEATER!⚠️")
+        raise NotImplemented("⚠️CHEATER!⚠️")
 except KeyError:
     print("KEYERROR!")
     pass
@@ -43,8 +43,7 @@ try:
         pass
     else:
         db["first_time"] = True
-except Exception:
-    db["first_time"] = True
+
 
 if db['first_time']:
     db["first_time"] = False
@@ -53,7 +52,6 @@ if db['first_time']:
 
 # Class for climbing system
 class ClimbingSystem:
-
     def __init__(self):
         self.position = 0
         self.max_height = 10
@@ -66,7 +64,7 @@ class ClimbingSystem:
 
     def climb(self):
         if not self.alive:
-            return "False"
+            return False
 
         print(f"Press '{self.current_key}' to climb!")
         key = getkey()
@@ -95,7 +93,6 @@ class ClimbingSystem:
 
         self.current_key = random.choice(self.keys)
         return True
-
 
 def climb():
     # Usage example
@@ -127,13 +124,13 @@ print("[NOTE]: Successfully launched game.")
 # CODE STARTS HERE
 print("WELCOME!")
 start = input("Do. \nYou. \nWish. \nTo. \nPlay. \nMy. \nGame? \n").upper()
-while start != "YES":
-    if start == "YES":
-        break
-    else:
-        with open('save.json', 'w') as f:
-            json.dump(db, f)
-        exit()
+
+if start == "YES":
+    break
+else:
+    with open('save.json', 'w') as f:
+        json.dump(db, f)
+    exit()
 os.system("clear")
 
 
@@ -141,7 +138,7 @@ def sequence1():
     print("Good. Let's begin.")
     print("""
 You are at a payphone, and you have a piece of paper reading:
-Some of us contain 10 numbers, one of them don't.
+Some of us contain 10 numbers, some of them don't.
 The three-digit ones, will not help you at all.
 Any number starting or ending with 13 does not help you.
 The number is 12094444--
@@ -190,11 +187,6 @@ def sequence2():
         with open('save.json', 'w') as f:
             json.dump(db, f)
         exit()
-    else:
-        raise Alarm(
-            "This shouldn't happen. Please check code if you have modified return         statements"
-        )
-
     print("You have reached the top of the cliff.")
     os.system('clear')
     with open('save.json', 'w') as f:
@@ -207,11 +199,10 @@ def sequence3():
         "You reach a treasure area with a pot of gold, but the same phone booth is there."
     )
     print("You are scared that the phone booth will attack you.")
-    print("Do you wish to take the gold? Or do you run away?")
-    choice = input("Do you get gold or run away (get gold/run away)? ").upper()
+    choice = input("Do you wish to take the gold? Or do you run away? (get gold/run away)").upper()
     if choice == "GET GOLD":
         print(
-            "The phone booth was a prop and did not do anything. You were able to retrieve the gold and win!"
+            "Lucky for you, the phone booth was a prop and did not do anything. You were able to retrieve the gold and win!"
         )
 
         print("You. Won.")
@@ -244,7 +235,7 @@ def sequence3():
         return False
 
 
-while True:
+while db['stage'] != 4:
     try:
         if db['stage'] == 1:
             sequence1()
@@ -261,22 +252,28 @@ while True:
                     json.dump(db, f)
                 exit()
         elif db['stage'] == 4:
-            print("You've won the game already.")
-            x = input("Do you wish to keep your data [yes/no]? ").upper()
-            if x == "YES":
-                db['stage'] = 4
-                with open('save.json', 'w') as f:
-                    json.dump(db, f)
-            else:
-                db['stage'] = 1
-                print(
-                    "Game successfully reset. You will now start from the beginning next time you load."
-                )
-                with open('save.json', 'w') as f:
-                    json.dump(db, f)
-                exit()
-
+            break
         else:
             raise Alarm('What the heck happened here?')
     except KeyError:
         sequence1()
+if db['stage'] == 4:
+    print("You've won the game already.")
+    x = input("Do you wish to keep your data [yes/no]? ").upper()
+    if x == "YES":
+        print("Alright then.")
+        with open('save.json', 'w') as f:
+            json.dump(db, f)
+        exit()
+    else:
+        db['stage'] = 1
+        print(
+            "Game successfully reset. You will now start from the beginning next time you load."
+        )
+        with open('save.json', 'w') as f:
+            json.dump(db, f)
+        exit()
+
+
+
+        
