@@ -7,9 +7,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-
-    - uses: JackMcKew/pyinstaller-action-windows@v0.1.2
+    - name: Checkout 
+      uses: actions/checkout@v2
+    - name: Build
+      uses: JackMcKew/pyinstaller-action-windows@v0.1.2
       with:
         # Directory containing source code (optional requirements.txt).
         path: . # default is src
@@ -19,7 +20,7 @@ jobs:
         name: text-adventure
         path: dist/windows
     - name: Zip folder
-      run: zip main/
+      run: zip -r text-adventure-windows.zip main\\.
     - name: Release
       uses: xresloader/upload-to-github-release@v1
       env:
