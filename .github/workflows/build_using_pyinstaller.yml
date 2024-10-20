@@ -3,7 +3,7 @@ name: Build GUI exe with Pyinstaller
 on: [push]
 jobs:
   build:
-
+    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
