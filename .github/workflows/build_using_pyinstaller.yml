@@ -22,24 +22,8 @@ jobs:
         name: main
         path: dist/windows
     - name: Create/Update release and upload assets
-  # You may pin to the exact commit or the version.
-  # uses: ColinPitrat/update-release@ae88712eedac1679d610a95fde906b2d4c94614a
-      uses: ColinPitrat/update-release@v1.0.1
-      with:
-        # Your Github token; try \$\{\{ secrets.GITHUB_TOKEN \}\} if your build lasts less than an hour, or create your own secret token with repository access if your build requires longer than an hour.
-        token:  ${{ secrets.GITHUB_TOKEN }}
-        # Paths to built files to be released. May be absolute or relative to \$\{\{ github.workspace \}\}.
-        files: dist/windows/main
-        # The name of the release to be created. A reasonable looking release name will be created from the current \$\{\{ github.ref \}\} if this input is not supplied.
-        release: # optional
-        # The name of the tag to be used. If not provided, the name of the release will be used.
-        tag: # optional
-        # A one-line description for both the tag and the release.
-        message: # optional
-        # A fuller description of the release.
-        body: # optional
-        # Should the release, if created, be marked as a prerelease?  Such releases are generally publicly visible.
-        prerelease: # optional
-        # Should the release, if created, be marked as a draft?  Such releases are generally not publicly visible.
-        draft: # optional
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
           
