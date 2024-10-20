@@ -15,13 +15,11 @@ jobs:
         path: . # default is src
     - uses: actions/upload-artifact@v3
       with:
-        name: main
+        name: text-adventure
         path: dist/windows
-    - name: Create/Update release and upload assets
-      id: create_release
-      uses: actions/create-release@v1
+    - uses: ColinPitrat/update-release@v1.0.1
       with:
-        tag_name: release
-      env:
-        GITHUB_TOKEN: ${{ github.token }} 
+        token: ${{ github.token }}
+        files: dist/windows/text-adventure.zip
+
           
