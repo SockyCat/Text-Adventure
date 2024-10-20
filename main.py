@@ -47,13 +47,6 @@ except Exception:
     db["first_time"] = True
 
 if db['first_time']:
-    print(
-        "[NOTE] Please note that any input field (except for climbing sequence) is NOT case sensitive. The climbing sequence is case sensitive, and requires you to click the lowercase version of that key."
-    )
-    input("If you understand, please press enter to continue...")
-    os.system("clear")
-    print("[NOTE] This is the database version; your data will save...")
-    cheatcode = False
     db["first_time"] = False
     db['stage'] = 1
 
