@@ -34,15 +34,15 @@ try:
         print("[ERROR]: Why did you try?")
         raise NotImplemented("⚠️CHEATER!⚠️")
 except KeyError:
-    print("KEYERROR!")
-    pass
+    print("This program comes with a file with '.json' at the end. If you're receiving this error, that file may be corrupted or does not exist. Can you please check that?")
+    exit()
 except IndexError:
     print("[NOTE]: Cheat code bypassed.")
-try:
-    if not db["first_time"]:
-        pass
-    else:
-        db["first_time"] = True
+
+if not db["first_time"]:
+    pass
+else:
+    db["first_time"] = True
 
 
 if db['first_time']:
