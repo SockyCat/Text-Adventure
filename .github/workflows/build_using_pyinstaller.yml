@@ -19,9 +19,12 @@ jobs:
         name: text-adventure
         path: dist/windows
     - name: Release
-      uses: softprops/action-gh-release@v2
-      if: startsWith(github.ref, 'refs/tags/')
+      uses: xresloader/upload-to-github-release@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
       with:
-        files: dist/windows/text-adventure
+        file: "dist/windows"
+        tags: true
+        draft: false
 
           
