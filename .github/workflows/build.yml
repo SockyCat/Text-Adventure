@@ -6,8 +6,10 @@ jobs:
   Python:
     runs-on: ubuntu-latest
     steps:
-    - name: Output Run ID
-      run: echo ${{ env.sha_short }}
+    - name: Set Run ID
+      run: echo "$(git rev-parse --short "$GITHUB_SHA")" > $id
+    - name: Check Run ID
+      run: echo ${{ id }}
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
