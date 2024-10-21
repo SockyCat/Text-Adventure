@@ -1,4 +1,4 @@
-name: Build GUI exe with Pyinstaller
+name: Building workflow
 
 on: [push]
 jobs:
@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Output Run ID
-      run: echo ${{ env.sha_short }}
+      run: echo $(git rev-parse --short "$GITHUB_SHA")
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
