@@ -241,7 +241,8 @@ def sequence3():
 
 while db['stage'] != 4:
     try:
-        match db['stage']:
+        stage = db['stage']
+        match stage:
             case 1:
                 sequence1()
             case 2:
