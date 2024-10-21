@@ -182,7 +182,7 @@ def sequence2():
     )
     print("You decide to climb.")
     input("Press enter to continue...")
-    os.system('clear')
+    os.system(clear)
     climb_result = climb()  # Climbing system initation
     if climb_result:
         pass
@@ -192,7 +192,7 @@ def sequence2():
             json.dump(db, f)
         exit()
     print("You have reached the top of the cliff.")
-    os.system('clear')
+    os.system(clear)
     with open('save.json', 'w') as f:
         json.dump(db, f)
     db['stage'] = 3
@@ -203,7 +203,7 @@ def sequence3():
         "You reach a treasure area with a pot of gold, but the same phone booth is there."
     )
     print("You are scared that the phone booth will attack you.")
-    choice = input("Do you wish to take the gold? Or do you run away? (get gold/run away)").upper()
+    choice = input("Do you wish to take the gold? Or do you run away? (get gold/run away) ").upper()
     if choice == "GET GOLD":
         print(
             "Lucky for you, the phone booth was a prop and did not do anything. You were able to retrieve the gold and win!"
