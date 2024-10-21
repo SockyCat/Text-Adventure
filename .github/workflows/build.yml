@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Output Run ID
-      run: echo ${{GITHUB_SHA::6}}
+      run: echo $(echo $GITHUB_SHA | cut -c1-7)q
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
