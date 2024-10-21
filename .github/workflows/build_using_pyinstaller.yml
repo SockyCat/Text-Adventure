@@ -2,8 +2,24 @@ name: Build GUI exe with Pyinstaller
 
 on: [push]
 jobs:
-
+  Python:
+    
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.10
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r $(git ls-files 'requirements.txt')
+    - name: Analysing the code with pylint
+      run: |
+        python $(git ls-files '*.py') debug
   win_linux:
+    needs: Python
     name: Comple Windows and Linux Binaries
     permissions: write-all
     runs-on: ubuntu-latest
@@ -32,20 +48,5 @@ jobs:
         file: "dist\\windows\\main\\win.zip"
         tags: false
         draft: false
-  Python:
-    needs: win_linux
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.10
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r $(git ls-files 'requirements.txt')
-    - name: Analysing the code with pylint
-      run: |
-        python $(git ls-files '*.py') debug
+
           
