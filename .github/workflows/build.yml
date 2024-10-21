@@ -1,15 +1,13 @@
 name: Building workflow
 
 on: [push]
-env:
-  ID: $(git rev-parse --short "$GITHUB_SHA")
 jobs:
   
   Python:
     runs-on: ubuntu-latest
     steps:
     - name: Show Run ID
-      run: echo ${{ env.ID }}
+      run: echo ${{ github.sha }}
 
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
@@ -56,15 +54,15 @@ jobs:
     - name: Copy Necessary Files
       run: cp ./save.json dist/windows/main && cp ./save.json dist/linux/main
     - name: Zip Windows
-      run: cd dist/windows/main && zip win-${{ env.sha_short }}.zip * 
+      run: cd dist/windows/main && zip win-${{ github.sha }}.zip * 
     - name: Zip Linux
-      run: cd dist/linux/main && zip linux-${{ env.sha_short }}.zip * 
+      run: cd dist/linux/main && zip linux-${{ github.sha }}.zip * 
     - name: Release
       uses: xresloader/upload-to-github-release@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        file: "dist\\windows\\main\\win-${{ env.ID }}.zip;dist\\linux\\main\\linux-${{ env.sha_short }}.zip"
+        file: "dist\\windows\\main\\win-${{ github.sha }}.zip;dist\\linux\\main\\linux-${{ github.sha }}.zip"
         tags: false
         draft: false
 
