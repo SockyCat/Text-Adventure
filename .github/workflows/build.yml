@@ -49,6 +49,8 @@ jobs:
       with:
         name: text-adventure-linux
         path: dist/linux
+    - name: Copy Necessary Files
+      run: cp ./save.json dist/windows/main && cp ./save.json dist/linux/main
     - name: Zip Windows
       run: cd dist/windows/main && zip win.zip * 
     - name: Zip Linux
