@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Show Run ID
-      run: echo $ID
+      run: echo ${{ env.ID }}
 
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
@@ -64,7 +64,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        file: "dist\\windows\\main\\win-${{ env.sha_short }}.zip;dist\\linux\\main\\linux-${{ env.sha_short }}.zip"
+        file: "dist\\windows\\main\\win-${{ env.ID }}.zip;dist\\linux\\main\\linux-${{ env.sha_short }}.zip"
         tags: false
         draft: false
 
