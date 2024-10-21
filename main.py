@@ -37,7 +37,7 @@ try:
         exit()
     else:
         print("[ERROR]: Why did you try?")
-        raise NotImplemented("⚠️CHEATER!⚠️")
+        raise Alarm("⚠️CHEATER!⚠️")
 except KeyError:
     print("This program comes with a file with '.json' at the end. If you're receiving this error, that file may be corrupted or does not exist. Can you please check that?")
     exit()
