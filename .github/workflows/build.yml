@@ -23,7 +23,7 @@ jobs:
         python $(git ls-files '*.py') debug
   win_linux:
     needs: Python
-    name: Comple Windows and Linux Binaries
+    name: Compile Windows and Linux Binaries
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
