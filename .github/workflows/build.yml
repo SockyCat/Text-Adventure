@@ -17,7 +17,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r $(git ls-files 'requirements.txt')
-    - name: Analysing the code with pylint
+    - name: Run code with debug statement
       run: |
         python $(git ls-files '*.py') debug
   win_linux:
@@ -54,15 +54,15 @@ jobs:
     - name: Copy Necessary Files
       run: cp ./save.json dist/windows/main && cp ./save.json dist/linux/main
     - name: Zip Windows
-      run: cd dist/windows/main && zip win.zip * 
+      run: cd dist/windows/main && zip win-$(echo $GITHUB_SHA | cut -c1-7).zip * 
     - name: Zip Linux
-      run: cd dist/linux/main && zip linux.zip * 
+      run: cd dist/linux/main && zip linux-$(echo $GITHUB_SHA | cut -c1-7).zip * 
     - name: Release
       uses: xresloader/upload-to-github-release@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        file: "dist\\windows\\main\\win.zip;dist\\linux\\main\\linux.zip"
+        file: "dist\\windows\\main\\win-$(echo $GITHUB_SHA | cut -c1-7).zip;dist\\linux\\main\\linux-$(echo $GITHUB_SHA | cut -c1-7).zip"
         tags: false
         draft: false
 
