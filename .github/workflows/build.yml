@@ -1,15 +1,16 @@
 name: Building workflow
 
 on: [push]
+env:
+  ID: $(git rev-parse --short "$GITHUB_SHA")
 jobs:
   
   Python:
     runs-on: ubuntu-latest
     steps:
-    - name: Set Run ID
-      run: echo "$(git rev-parse --short "$GITHUB_SHA")" > $id
-    - name: Check Run ID
-      run: echo ${{ id }}
+    - name: Show Run ID
+      run: echo "$ID"
+
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
