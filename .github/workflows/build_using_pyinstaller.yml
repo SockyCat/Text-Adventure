@@ -20,7 +20,7 @@ jobs:
         name: text-adventure
         path: dist/windows
     - name: View Files
-      run: pwd && ls
+      run: cd dist/windows/main && zip win.zip * && cd ../../../ && ls
       
     - name: Release
       uses: xresloader/upload-to-github-release@v1
