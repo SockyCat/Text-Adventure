@@ -20,7 +20,7 @@ jobs:
         name: text-adventure
         path: dist/windows
     - name: Zip folder
-      run: ls dist/windows/main && zip -r text-adventure-win.zip dist/windows/main && ls 
+      run: zip -r text-adventure-win.zip dist/windows/main && ls 
     - name: Release
       uses: xresloader/upload-to-github-release@v1
       env:
