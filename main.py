@@ -19,6 +19,7 @@ class Alarm(Exception):
     
 try:
     argv = sys.argv[1]
+    print(argv)
     # print(argv)
     if argv == "dev":
         print("[⚠️ ⚠️ ⚠️ ]: Dev mode. Certain things may break.")
@@ -37,7 +38,7 @@ try:
         exit()
     else:
         print("[ERROR]: Why did you try?")
-        raise Alarm("⚠️CHEATER!⚠️")
+        
 except KeyError:
     print("This program comes with a file with '.json' at the end. If you're receiving this error, that file may be corrupted or does not exist. Can you please check that?")
     exit()
