@@ -242,12 +242,12 @@ def sequence3():
 while db['stage'] != 4:
     try:
         stage = db['stage']
-        match stage:
-            case 1:
+        if True:
+            if stage == 1:
                 sequence1()
-            case 2:
+            elif stage == 2:
                 sequence2()
-            case 3:
+            elif stage == 3:
                 a = sequence3()
                 if not a:
                     print(
@@ -257,9 +257,9 @@ while db['stage'] != 4:
                     with open('save.json', 'w') as f:
                         json.dump(db, f)
                     exit()
-            case 4:
+            elif stage == 4:
                 break
-            case _:
+            else:
                 raise Alarm('What the heck happened here?')
     except KeyError:
         sequence1()
