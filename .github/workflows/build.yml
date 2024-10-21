@@ -2,8 +2,8 @@ name: Building workflow
 
 on: [push]
 jobs:
+  
   Python:
-    
     runs-on: ubuntu-latest
     steps:
     - name: Output Run ID
@@ -25,7 +25,6 @@ jobs:
     name: Comple Windows and Linux Binaries
     permissions: write-all
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout 
       uses: actions/checkout@v2
@@ -54,15 +53,15 @@ jobs:
     - name: Copy Necessary Files
       run: cp ./save.json dist/windows/main && cp ./save.json dist/linux/main
     - name: Zip Windows
-      run: cd dist/windows/main && zip win-${{(echo $GITHUB_SHA | cut -c1-7)}}.zip * 
+      run: cd dist/windows/main && zip win-${{ env.sha_short }}.zip * 
     - name: Zip Linux
-      run: cd dist/linux/main && zip linux-${{(echo $GITHUB_SHA | cut -c1-7)}}.zip * 
+      run: cd dist/linux/main && zip linux-${{ env.sha_short }}.zip * 
     - name: Release
       uses: xresloader/upload-to-github-release@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        file: "dist\\windows\\main\\win-${{(echo $GITHUB_SHA | cut -c1-7)}}.zip;dist\\linux\\main\\linux-${{(echo $GITHUB_SHA | cut -c1-7)}}.zip"
+        file: "dist\\windows\\main\\win-${{ env.sha_short }}.zip;dist\\linux\\main\\linux-${{ env.sha_short }}.zip"
         tags: false
         draft: false
 
