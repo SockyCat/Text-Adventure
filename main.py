@@ -1,5 +1,3 @@
-a
-
 # Import required modules
 import random
 import os
