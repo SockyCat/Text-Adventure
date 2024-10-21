@@ -9,18 +9,19 @@ if os.name == "nt":
     clear = "cls"
 else:
     clear = "clear"
-
-db = json.load(open("save.json"))
+try:
+    db = json.load(open("save.json", "r"))
+except FileNotFoundError:
+    print("The save.json file was not found, or it was corrupted. Please retrieve it and put it in this working directory.")
+    exit(1)
 cheatcode = False
 
-# This is sort of a joke
 class Alarm(Exception):
     pass
     
 try:
     argv = sys.argv[1]
     print(argv)
-    # print(argv)
     if argv == "dev":
         print("[⚠️ ⚠️ ⚠️ ]: Dev mode. Certain things may break.")
         cheatcode = True
@@ -80,9 +81,9 @@ class ClimbingSystem:
                 self.position = self.max_height
             os.system(clear)
             if self.position == 1:
-                print(f"Climbed 1 up. You are now at {self.position} meter.")
+                print(f"Climbed 1 up. You are now at {self.position} metre.")
             else:
-                print(f"Climbed 1 up. You are now at {self.position} meters.")
+                print(f"Climbed 1 up. You are now at {self.position} metres.")
         elif key == keys.ESC:
             return False
         else:
@@ -103,11 +104,11 @@ class ClimbingSystem:
 def climb():
     # Usage example
     climber = ClimbingSystem()
-    print("Start climbing! Press what key is present when prompted.")
-    print("You need to climb up to 10 meters.")
-    print("Press any other key to wait (and fall).")
+    print("To start climbing, press the key that is shown.")
+    print("You need to climb up to 10 metres to succeed.")
+    print("Pressing any other key or waiting will make you fall.")
     print("Press 'ESC' to stop climbing.")
-    print("If you fall from a height greater than 5 meters, you die!")
+    print("If you fall from a height greater than 5 metres, you die!")
 
     while climber.position < climber.max_height and climber.alive:
         if not climber.climb():
@@ -116,11 +117,8 @@ def climb():
     if climber.position >= climber.max_height:
         print("Congratulations! You reached the top!")
         return True
-    elif not climber.alive:
-        print("Game Over. You died from falling.")
-        return False
     else:
-        print("You stopped halfway and fell, dying in the process.")
+        print("Game Over. You died from falling.")
         return False
 
 
@@ -129,9 +127,8 @@ print("[NOTE]: Successfully launched game.")
 
 # CODE STARTS HERE
 print("WELCOME!")
-start = input("Do. \nYou. \nWish. \nTo. \nPlay. \nMy. \nGame? \n").upper()
-
-if start == "YES":
+start = input("Do. \nYou. \nWish. \nTo. \nPlay. \nMy. \nGame? \n[y/n] ").upper()
+if "Y" in start:
     pass
 else:
     print("You really don't want to play it, don't you?")
@@ -244,24 +241,25 @@ def sequence3():
 
 while db['stage'] != 4:
     try:
-        if db['stage'] == 1:
-            sequence1()
-        elif db['stage'] == 2:
-            sequence2()
-        elif db['stage'] == 3:
-            a = sequence3()
-            if not a:
-                print(
-                    "You are now banned. Because of how good you are, all of your progress has reset. You will have to restart the game."
-                )
-                db['stage'] == 1
-                with open('save.json', 'w') as f:
-                    json.dump(db, f)
-                exit()
-        elif db['stage'] == 4:
-            break
-        else:
-            raise Alarm('What the heck happened here?')
+        match db['stage']:
+            case 1:
+                sequence1()
+            case 2:
+                sequence2()
+            case 3:
+                a = sequence3()
+                if not a:
+                    print(
+                        "You are now banned. Because of how good you are, all of your progress has reset. You will have to restart the game."
+                    )
+                    db['stage'] == 1
+                    with open('save.json', 'w') as f:
+                        json.dump(db, f)
+                    exit()
+            case 4:
+                break
+            case _:
+                raise Alarm('What the heck happened here?')
     except KeyError:
         sequence1()
 if db['stage'] == 4:
@@ -279,7 +277,7 @@ if db['stage'] == 4:
         )
         with open('save.json', 'w') as f:
             json.dump(db, f)
-        exit()
+        
 
 
 
