@@ -20,14 +20,14 @@ jobs:
         name: text-adventure
         path: dist/windows
     - name: View Files
-      run: cd dist/windows/main && zip win.zip * && cd ../../../ && ls
+      run: cd dist/windows/main && zip win.zip * 
       
     - name: Release
       uses: xresloader/upload-to-github-release@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        file: "dist\\windows\\main\\text-adventure-win.zip"
+        file: "dist\\windows\\main\\win.zip"
         tags: false
         draft: false
 
