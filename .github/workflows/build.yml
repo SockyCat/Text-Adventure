@@ -27,25 +27,38 @@ jobs:
     steps:
     - name: Checkout 
       uses: actions/checkout@v2
-    - name: Build
+    - name: Build Windows
       uses: JackMcKew/pyinstaller-action-windows@v0.1.2
       with:
         # Directory containing source code (optional requirements.txt).
         path: . # default is src
-    - name: Upload artifact
+    - name: Upload artifact for Windows
       uses: actions/upload-artifact@v3
       with:
-        name: text-adventure
+        name: text-adventure-win
         path: dist/windows
-    - name: View Files
+    - name: Build Linux
+      # You may pin to the exact commit or the version.
+      # uses: JackMcKew/pyinstaller-action-linux@38639c352a36917eea765f9283bfd1092c28af7b
+      uses: JackMcKew/pyinstaller-action-linux@0.1.4
+      with:
+        # Directory containing source code & .spec file (optional requirements.txt).
+        path: .
+    - name: Upload artifact for Linux
+      uses: actions/upload-artifact@v3
+      with:
+        name: text-adventure-linux
+        path: dist/linux
+    - name: Zip Windows
       run: cd dist/windows/main && zip win.zip * 
-      
+    - name: Zip Linux
+      run: cd dist/linux/main && zip linux.zip * 
     - name: Release
       uses: xresloader/upload-to-github-release@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        file: "dist\\windows\\main\\win.zip"
+        file: "dist\\windows\\main\\win.zip;dist\\linux\\main\\linux.zip"
         tags: false
         draft: false
 
