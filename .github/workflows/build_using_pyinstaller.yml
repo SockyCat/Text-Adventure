@@ -20,7 +20,8 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         python $(git ls-files '*.py') debug
-  Compile Win/Linux:
+  win_linux:
+    name: Comple Windows and Linux Binaries
     permissions: write-all
     runs-on: ubuntu-latest
 
