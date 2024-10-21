@@ -5,6 +5,11 @@ import sys
 import json
 from getkey import getkey, keys
 
+if os.name == "nt":
+    clear = "cls"
+else:
+    clear = "clear"
+
 db = json.load(open("save.json"))
 cheatcode = False
 
@@ -72,7 +77,7 @@ class ClimbingSystem:
             self.position += 1
             if self.position > self.max_height:
                 self.position = self.max_height
-            os.system("clear")
+            os.system(clear)
             if self.position == 1:
                 print(f"Climbed 1 up. You are now at {self.position} meter.")
             else:
@@ -82,13 +87,13 @@ class ClimbingSystem:
         else:
             fall_distance = 1
             if self.position > 5:
-                os.system("clear")
+                os.system(clear)
                 print(f"Fell from height {self.position}. You died!")
                 self.alive = False
                 return False
             else:
                 self.position = max(0, self.position - fall_distance)
-                os.system("clear")
+                os.system(clear)
                 print(f"Waited and fell to position: {self.position}")
 
         self.current_key = random.choice(self.keys)
@@ -118,7 +123,7 @@ def climb():
         return False
 
 
-os.system("clear")
+os.system(clear)
 print("[NOTE]: Successfully launched game.")
 
 # CODE STARTS HERE
@@ -132,7 +137,7 @@ else:
     with open('save.json', 'w') as f:
         json.dump(db, f)
     exit()
-os.system("clear")
+os.system(clear)
 
 
 def sequence1():
