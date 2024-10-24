@@ -5,11 +5,11 @@ import sys
 import json
 from getkey import getkey, keys
 from rich.console import Console
-
+from subprocess import Popen as system
 console = Console()
 def clear():
     if os.name == 'nt':
-        os.system('cls')
+        system('cls', shell=False)
         return
     global console
     for x in range(50):
