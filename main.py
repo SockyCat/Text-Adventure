@@ -4,11 +4,9 @@ import os
 import sys
 import json
 from getkey import getkey, keys
+from rich import clear
+from rich import print
 
-if os.name == "nt":
-    clear = "cls"
-else:
-    clear = "clear"
 try:
     db = json.load(open("save.json", "r"))
 except FileNotFoundError:
