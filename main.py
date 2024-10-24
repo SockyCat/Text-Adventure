@@ -4,13 +4,13 @@ import os
 import sys
 import json
 from getkey import getkey, keys
-from rich import clear
-from rich import print
+from rich.console import Console
 
+console = Console()
 try:
     db = json.load(open("save.json", "r"))
 except FileNotFoundError:
-    print("The save.json file was not found, or it was corrupted. Please retrieve it and put it in this working directory.")
+    console.print("The save.json file was not found, or it was corrupted. Please retrieve it and put it in this working directory.")
     exit(1)
 cheatcode = False
 
@@ -19,30 +19,30 @@ class Alarm(Exception):
     
 try:
     argv = sys.argv[1]
-    print(argv)
+    console.print(argv)
     if argv == "dev":
-        print("[⚠️ ⚠️ ⚠️ ]: Dev mode. Certain things may break.")
+        console.print("[⚠️ ⚠️ ⚠️ ]: Dev mode. Certain things may break.")
         cheatcode = True
-        print("[NOTE]: Cheat code registered.")
+        console.print("[NOTE]: Cheat code registered.")
         input("Press enter to continue...")
     elif argv == "reset-data":
         db["first_time"] = True
         db["stage"] = 1
         with open('save.json', 'w') as f:
             json.dump(db, f)
-        print("[NOTE]: Your data has been reset.")
+        console.print("[NOTE]: Your data has been reset.")
         exit()
     elif argv == "debug":
-        print("Yep, all good. You would get errors if this didn't come up")
+        console.print("Yep, all good. You would get errors if this didn't come up")
         exit()
     else:
-        print("[ERROR]: Why did you try?")
+        console.print("[ERROR]: Why did you try?")
         
 except KeyError:
-    print("This program comes with a file with '.json' at the end. If you're receiving this error, that file may be corrupted or does not exist. Can you please check that?")
+    console.print("This program comes with a file with '.json' at the end. If you're receiving this error, that file may be corrupted or does not exist. Can you please check that?")
     exit()
 except IndexError:
-    print("[NOTE]: Cheat code bypassed.")
+    console.print("[NOTE]: Cheat code bypassed.")
 
 if not db["first_time"]:
     pass
@@ -71,30 +71,30 @@ class ClimbingSystem:
         if not self.alive:
             return False
 
-        print(f"Press '{self.current_key}' to climb!")
+        console.print(f"Press '{self.current_key}' to climb!")
         key = getkey()
         if key == self.current_key:
             self.position += 1
             if self.position > self.max_height:
                 self.position = self.max_height
-            os.system(clear)
+            console.clear()
             if self.position == 1:
-                print(f"Climbed 1 up. You are now at {self.position} metre.")
+                console.print(f"Climbed 1 up. You are now at {self.position} metre.")
             else:
-                print(f"Climbed 1 up. You are now at {self.position} metres.")
+                console.print(f"Climbed 1 up. You are now at {self.position} metres.")
         elif key == keys.ESC:
             return False
         else:
             fall_distance = 1
             if self.position > 5:
-                os.system(clear)
-                print(f"Fell from height {self.position}. You died!")
+                console.clear()
+                console.print(f"Fell from height {self.position}. You died!")
                 self.alive = False
                 return False
             else:
                 self.position = max(0, self.position - fall_distance)
-                os.system(clear)
-                print(f"Waited and fell to position: {self.position}")
+                console.clear()
+                console.print(f"Waited and fell to position: {self.position}")
 
         self.current_key = random.choice(self.keys)
         return True
@@ -102,43 +102,43 @@ class ClimbingSystem:
 def climb():
     # Usage example
     climber = ClimbingSystem()
-    print("To start climbing, press the key that is shown.")
-    print("You need to climb up to 10 metres to succeed.")
-    print("Pressing any other key or waiting will make you fall.")
-    print("Press 'ESC' to stop climbing.")
-    print("If you fall from a height greater than 5 metres, you die!")
+    console.print("To start climbing, press the key that is shown.")
+    console.print("You need to climb up to 10 metres to succeed.")
+    console.print("Pressing any other key or waiting will make you fall.")
+    console.print("Press 'ESC' to stop climbing.")
+    console.print("If you fall from a height greater than 5 metres, you die!")
 
     while climber.position < climber.max_height and climber.alive:
         if not climber.climb():
             break
 
     if climber.position >= climber.max_height:
-        print("Congratulations! You reached the top!")
+        console.print("Congratulations! You reached the top!")
         return True
     else:
-        print("Game Over. You died from falling.")
+        console.print("Game Over. You died from falling.")
         return False
 
 
-os.system(clear)
-print("[NOTE]: Successfully launched game.")
+console.clear()
+console.print("[NOTE]: Successfully launched game.")
 
 # CODE STARTS HERE
-print("WELCOME!")
+console.print("WELCOME!")
 start = input("Do. \nYou. \nWish. \nTo. \nPlay. \nMy. \nGame? \n[y/n] ").upper()
 if "Y" in start:
     pass
 else:
-    print("You really don't want to play it, don't you?")
+    console.print("You really don't want to play it, don't you?")
     with open('save.json', 'w') as f:
         json.dump(db, f)
     exit()
-os.system(clear)
+console.clear()
 
 
 def sequence1():
-    print("Good. Let's begin.")
-    print("""
+    console.print("Good. Let's begin.")
+    console.print("""
 You are at a payphone, and you have a piece of paper reading:
 Some of us contain 10 numbers, some of them don't.
 The three-digit ones, will not help you at all.
@@ -149,23 +149,23 @@ It's between 10 and 20, but it's prime only.
 And here's the answer: The last digit is a multiple of 3""")
     no = int(input("What's the number? "))
     if no == 1209444419:
-        print("Correct. You have survived.")
-        print(
+        console.print("Correct. You have survived.")
+        console.print(
             "The door of the locked payphone opens, and you see a cliff before your eyes."
         )
     elif no == 000:
-        print("You really think the police can help you? I don't think so.")
-        print("The payphone shocks you hard, killing you in the process. ")
-        print("You. Are. Dead.")
+        console.print("You really think the police can help you? I don't think so.")
+        console.print("The payphone shocks you hard, killing you in the process. ")
+        console.print("You. Are. Dead.")
         with open('save.json', 'w') as f:
             json.dump(db, f)
         exit()
     elif cheatcode:
         pass
     else:
-        print("Wrong number.")
-        print("The payphone shocks you hard, killing you in the process. ")
-        print("You. Are. Dead.")
+        console.print("Wrong number.")
+        console.print("The payphone shocks you hard, killing you in the process. ")
+        console.print("You. Are. Dead.")
         with open('save.json', 'w') as f:
             json.dump(db, f)
         exit()
@@ -175,63 +175,63 @@ And here's the answer: The last digit is a multiple of 3""")
 
 
 def sequence2():
-    print(
+    console.print(
         "You are now surrounded by walls, you don't know how they got there, but you cannot climb them. They are covered in oil. There is, however, a cliff in front of you."
     )
-    print("You decide to climb.")
+    console.print("You decide to climb.")
     input("Press enter to continue...")
-    os.system(clear)
+    console.clear()
     climb_result = climb()  # Climbing system initation
     if climb_result:
         pass
     elif not climb_result:
-        print("You. Are. Dead.")
+        console.print("You. Are. Dead.")
         with open('save.json', 'w') as f:
             json.dump(db, f)
         exit()
-    print("You have reached the top of the cliff.")
-    os.system(clear)
+    console.print("You have reached the top of the cliff.")
+    console.clear()
     with open('save.json', 'w') as f:
         json.dump(db, f)
     db['stage'] = 3
 
 
 def sequence3():
-    print(
+    console.print(
         "You reach a treasure area with a pot of gold, but the same phone booth is there."
     )
-    print("You are scared that the phone booth will attack you.")
+    console.print("You are scared that the phone booth will attack you.")
     choice = input("Do you wish to take the gold? Or do you run away? (get gold/run away) ").upper()
     if choice == "GET GOLD":
-        print(
+        console.print(
             "Lucky for you, the phone booth was a prop and did not do anything. You were able to retrieve the gold and win!"
         )
 
-        print("You. Won.")
+        console.print("You. Won.")
         x = input("Do you wish to save your data [yes/no]? ").upper()
         if x == "YES":
             db['stage'] = 4
-            print("Your data is kept. You can now exit the game.")
+            console.print("Your data is kept. You can now exit the game.")
             with open('save.json', 'w') as f:
                 json.dump(db, f)
         else:
             db['stage'] = 1
-            print("Your data has been wiped. Thank you for playing!")
+            console.print("Your data has been wiped. Thank you for playing!")
             with open('save.json', 'w') as f:
                 json.dump(db, f)
         exit()
     elif choice == "RUN AWAY":
-        print(
+        console.print(
             "Had you have known that the phone booth was a prop, you could have actually got the gold."
         )
-        print(
+        console.print(
             "Oblivious to the environment around you, you fall off the cliff")
-        print("You. Are. Dead.")
+        console.print("You. Are. Dead.")
         with open('save.json', 'w') as f:
             json.dump(db, f)
         exit()
     else:
-        print(
+        console.print(
             "That's not an option, but the computer recognises that and bans you for cheating. What an idiot you are :/"
         )
         return False
@@ -248,7 +248,7 @@ while db['stage'] != 4:
             elif stage == 3:
                 a = sequence3()
                 if not a:
-                    print(
+                    console.print(
                         "You are now banned. Because of how good you are, all of your progress has reset. You will have to restart the game."
                     )
                     db['stage'] == 1
@@ -262,16 +262,16 @@ while db['stage'] != 4:
     except KeyError:
         sequence1()
 if db['stage'] == 4:
-    print("You've won the game already.")
+    console.print("You've won the game already.")
     x = input("Do you wish to keep your data [yes/no]? ").upper()
     if x == "YES":
-        print("Alright then.")
+        console.print("Alright then.")
         with open('save.json', 'w') as f:
             json.dump(db, f)
         exit()
     else:
         db['stage'] = 1
-        print(
+        console.print(
             "Game successfully reset. You will now start from the beginning next time you load."
         )
         with open('save.json', 'w') as f:
