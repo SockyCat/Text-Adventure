@@ -8,6 +8,9 @@ from rich.console import Console
 
 console = Console()
 def clear():
+    if os.name == 'nt':
+        os.system('cls')
+        return
     global console
     for x in range(50):
         console.clear()
