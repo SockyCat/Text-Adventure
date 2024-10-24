@@ -78,6 +78,7 @@ class ClimbingSystem:
             if self.position > self.max_height:
                 self.position = self.max_height
             console.clear()
+            console.clear()
             if self.position == 1:
                 console.print(f"Climbed 1 up. You are now at {self.position} metre.")
             else:
@@ -88,11 +89,13 @@ class ClimbingSystem:
             fall_distance = 1
             if self.position > 5:
                 console.clear()
+                console.clear()
                 console.print(f"Fell from height {self.position}. You died!")
                 self.alive = False
                 return False
             else:
                 self.position = max(0, self.position - fall_distance)
+                console.clear()
                 console.clear()
                 console.print(f"Waited and fell to position: {self.position}")
 
@@ -121,6 +124,7 @@ def climb():
 
 
 console.clear()
+console.clear()
 console.print("[NOTE]: Successfully launched game.")
 
 # CODE STARTS HERE
@@ -133,6 +137,7 @@ else:
     with open('save.json', 'w') as f:
         json.dump(db, f)
     exit()
+console.clear()
 console.clear()
 
 
@@ -181,6 +186,7 @@ def sequence2():
     console.print("You decide to climb.")
     input("Press enter to continue...")
     console.clear()
+    console.clear()
     climb_result = climb()  # Climbing system initation
     if climb_result:
         pass
@@ -190,6 +196,7 @@ def sequence2():
             json.dump(db, f)
         exit()
     console.print("You have reached the top of the cliff.")
+    console.clear()
     console.clear()
     with open('save.json', 'w') as f:
         json.dump(db, f)
