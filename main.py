@@ -7,6 +7,10 @@ from getkey import getkey, keys
 from rich.console import Console
 
 console = Console()
+def clear():
+    global console
+    for x in range(50):
+        console.clear()
 try:
     db = json.load(open("save.json", "r"))
 except FileNotFoundError:
@@ -77,8 +81,8 @@ class ClimbingSystem:
             self.position += 1
             if self.position > self.max_height:
                 self.position = self.max_height
-            console.clear()
-            console.clear()
+            clear()
+            clear()
             if self.position == 1:
                 console.print(f"Climbed 1 up. You are now at {self.position} metre.")
             else:
@@ -88,15 +92,15 @@ class ClimbingSystem:
         else:
             fall_distance = 1
             if self.position > 5:
-                console.clear()
-                console.clear()
+                clear()
+                clear()
                 console.print(f"Fell from height {self.position}. You died!")
                 self.alive = False
                 return False
             else:
                 self.position = max(0, self.position - fall_distance)
-                console.clear()
-                console.clear()
+                clear()
+                clear()
                 console.print(f"Waited and fell to position: {self.position}")
 
         self.current_key = random.choice(self.keys)
@@ -123,8 +127,8 @@ def climb():
         return False
 
 
-console.clear()
-console.clear()
+clear()
+clear()
 console.print("[NOTE]: Successfully launched game.")
 
 # CODE STARTS HERE
@@ -137,8 +141,8 @@ else:
     with open('save.json', 'w') as f:
         json.dump(db, f)
     exit()
-console.clear()
-console.clear()
+clear()
+clear()
 
 
 def sequence1():
@@ -185,8 +189,8 @@ def sequence2():
     )
     console.print("You decide to climb.")
     input("Press enter to continue...")
-    console.clear()
-    console.clear()
+    clear()
+    clear()
     climb_result = climb()  # Climbing system initation
     if climb_result:
         pass
@@ -196,8 +200,8 @@ def sequence2():
             json.dump(db, f)
         exit()
     console.print("You have reached the top of the cliff.")
-    console.clear()
-    console.clear()
+    clear()
+    clear()
     with open('save.json', 'w') as f:
         json.dump(db, f)
     db['stage'] = 3
