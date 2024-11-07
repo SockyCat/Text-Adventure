@@ -14,7 +14,7 @@ def clear():
     global console
     for x in range(50):
         console.clear()
-def _print(*str: str) => None:
+def _print(*str: str):
     if os.name == 'nt':
         print(str)
         return
